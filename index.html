@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3</title>
+  <title>Red　Found</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -41,8 +41,8 @@
         const blue = frame.data[i + 2];
         const alpha = frame.data[i + 3];
 
-        // Check if this pixel is the reddest one found so far
-        if (red > maxRed) {
+        // Consider this pixel if red is significantly greater than green and blue
+        if (red > 100 && red > green * 1.5 && red > blue * 1.5 && red > maxRed) {
           maxRed = red;
           maxRedX = (i / 4) % canvas.width;
           maxRedY = Math.floor((i / 4) / canvas.width);
