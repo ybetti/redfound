@@ -18,14 +18,14 @@
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
 
-    // リアカメラを使用するための制約を設定
+    // 外カメラを使用するための制約を設定
     const constraints = {
       video: {
         facingMode: { exact: "environment" } // "user" を "environment" に変更することでリアカメラを使用する
       }
     };
 
-    // ビデオストリームを取得して表示
+    // ビデオを取得して表示
     navigator.mediaDevices.getUserMedia(constraints)
       .then(function(stream) {
         video.srcObject = stream;
@@ -50,7 +50,7 @@
         const blue = frame.data[i + 2];
         const alpha = frame.data[i + 3];
 
-        // 赤色成分が他の色成分よりも顕著に強い場合のみ対象とする
+        // 赤色の成分が他の色の成分よりも顕著に強い場合のみ対象とする
         if (red > 100 && red > green * 1.5 && red > blue * 1.5 && red > maxRed) {
           maxRed = red;
           maxRedX = (i / 4) % canvas.width;
@@ -58,10 +58,10 @@
         }
       }
 
-      // 以前のフレームのマーカーを消去
+      // 前のフレームのマーカーを消去
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // 最も赤色が濃い部分にマーカーを描画
+      // 最も赤色が濃い部分に丸のマーカーを描画
       context.beginPath();
       context.arc(maxRedX, maxRedY, 10, 0, 2 * Math.PI, false);
       context.lineWidth = 3;
@@ -72,10 +72,12 @@
       requestAnimationFrame(draw);
     }
 
-    // ビデオが再生されると描画関数を呼び出す
+    // ビデオが表示されると描画を始める
     video.addEventListener('play', function() {
       draw();
     });
   </script>
+  
 </body>
+  
 </html>
