@@ -18,13 +18,22 @@
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
 
-    // Get access to the camera
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+    // リアカメラを使用するための制約を設定
+    const constraints = {
+      video: {
+        facingMode: { exact: "environment" } // "user" を "environment" に変更することでリアカメラを使用する
+      }
+    };
+
+    // ビデオストリームを取得して表示
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then(function(stream) {
         video.srcObject = stream;
         video.play();
+      })
+      .catch(function(err) {
+        console.log("An error occurred: " + err);
       });
-    }
 
     function draw() {
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -41,7 +50,7 @@
         const blue = frame.data[i + 2];
         const alpha = frame.data[i + 3];
 
-        // Consider this pixel if red is significantly greater than green and blue
+        // 赤色成分が他の色成分よりも顕著に強い場合のみ対象とする
         if (red > 100 && red > green * 1.5 && red > blue * 1.5 && red > maxRed) {
           maxRed = red;
           maxRedX = (i / 4) % canvas.width;
@@ -49,20 +58,21 @@
         }
       }
 
-      // Clear the previous frame's marker
+      // 以前のフレームのマーカーを消去
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // Draw a marker at the reddest point
+      // 最も赤色が濃い部分にマーカーを描画
       context.beginPath();
       context.arc(maxRedX, maxRedY, 10, 0, 2 * Math.PI, false);
       context.lineWidth = 3;
       context.strokeStyle = 'yellow';
       context.stroke();
 
-      // Call the draw function again for the next frame
+      // 次のフレームの描画をリクエスト
       requestAnimationFrame(draw);
     }
 
+    // ビデオが再生されると描画関数を呼び出す
     video.addEventListener('play', function() {
       draw();
     });
