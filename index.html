@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Red Color Detection</title>
+  <title>Screen Capture</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -11,20 +11,25 @@
   </style>
 </head>
 <body>
+  <button id="startCapture">Start Capture</button>
   <video id="video" width="640" height="480" autoplay></video>
   <canvas id="canvas" width="640" height="480"></canvas>
   <script>
+    const startCaptureButton = document.getElementById('startCapture');
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
 
-    // Get access to the camera
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+    startCaptureButton.addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
         video.srcObject = stream;
         video.play();
-      });
-    }
+        draw();
+      } catch (err) {
+        console.error("Error: " + err);
+      }
+    });
 
     function draw() {
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -62,10 +67,6 @@
       // Call the draw function again for the next frame
       requestAnimationFrame(draw);
     }
-
-    video.addEventListener('play', function() {
-      draw();
-    });
   </script>
 </body>
 </html>
