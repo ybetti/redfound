@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>色識別</title>
+  <title>2色識別</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -41,7 +41,7 @@
       let maxRedY = 0;
 
       const BLACK_THRESHOLD = 50;  // Adjust as needed
-      const WHITE_THRESHOLD = 150; // Adjust as needed
+      const WHITE_THRESHOLD = 200; // Adjust as needed
 
       for (let i = 0; i < length; i += 4) {
         const red = frame.data[i];
