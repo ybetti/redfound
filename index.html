@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Screen Capture</title>
+  <title>色識別</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -40,11 +40,20 @@
       let maxRedX = 0;
       let maxRedY = 0;
 
+      const BLACK_THRESHOLD = 50;  // Adjust as needed
+      const WHITE_THRESHOLD = 200; // Adjust as needed
+
       for (let i = 0; i < length; i += 4) {
         const red = frame.data[i];
         const green = frame.data[i + 1];
         const blue = frame.data[i + 2];
         const alpha = frame.data[i + 3];
+
+        // Ignore black and white pixels
+        if ((red < BLACK_THRESHOLD && green < BLACK_THRESHOLD && blue < BLACK_THRESHOLD) ||
+            (red > WHITE_THRESHOLD && green > WHITE_THRESHOLD && blue > WHITE_THRESHOLD)) {
+          continue;
+        }
 
         // Check if this pixel is the reddest one found so far
         if (red > maxRed) {
