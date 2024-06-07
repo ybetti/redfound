@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5Red　Found</title>
+  <title>Red Color Detection</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -11,61 +11,26 @@
   </style>
 </head>
 <body>
-  <video id="video" width="640" height="480" autoplay></video>
+  <!-- 他のアプリや画面で表示されている画像 -->
+  <img id="sourceImage" src="path/to/image.jpg" style="display:none;">
   <canvas id="canvas" width="640" height="480"></canvas>
   <script>
-    const video = document.getElementById('video');
+    const sourceImage = document.getElementById('sourceImage');
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
 
-    // Get access to the camera
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-        video.srcObject = stream;
-        video.play();
-      });
+    sourceImage.onload = function() {
+      // 画像が読み込まれたら処理を開始する
+      processImage();
+    };
+
+    function processImage() {
+      // 画像をキャンバスに描画する
+      context.drawImage(sourceImage, 0, 0, canvas.width, canvas.height);
+
+      // 以下、赤色検出とマーカーの描画のロジックを実装する
+      // (カメラ映像の場合と同様の手順を使用する)
     }
-
-    function draw() {
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const frame = context.getImageData(0, 0, canvas.width, canvas.height);
-      const length = frame.data.length;
-
-      let maxRed = 0;
-      let maxRedX = 0;
-      let maxRedY = 0;
-
-      for (let i = 0; i < length; i += 4) {
-        const red = frame.data[i];
-        const green = frame.data[i + 1];
-        const blue = frame.data[i + 2];
-        const alpha = frame.data[i + 3];
-
-        // Consider this pixel if red is significantly greater than green and blue
-        if (red > 100 && red > green * 1.5 && red > blue * 1.5 && red > maxRed) {
-          maxRed = red;
-          maxRedX = (i / 4) % canvas.width;
-          maxRedY = Math.floor((i / 4) / canvas.width);
-        }
-      }
-
-      // Clear the previous frame's marker
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-      // Draw a marker at the reddest point
-      context.beginPath();
-      context.arc(maxRedX, maxRedY, 10, 0, 2 * Math.PI, false);
-      context.lineWidth = 3;
-      context.strokeStyle = 'yellow';
-      context.stroke();
-
-      // Call the draw function again for the next frame
-      requestAnimationFrame(draw);
-    }
-
-    video.addEventListener('play', function() {
-      draw();
-    });
   </script>
 </body>
 </html>
