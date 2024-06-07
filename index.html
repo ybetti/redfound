@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2色識別</title>
+  <title>3</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -11,25 +11,20 @@
   </style>
 </head>
 <body>
-  <button id="startCapture">Start Capture</button>
   <video id="video" width="640" height="480" autoplay></video>
   <canvas id="canvas" width="640" height="480"></canvas>
   <script>
-    const startCaptureButton = document.getElementById('startCapture');
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
 
-    startCaptureButton.addEventListener('click', async () => {
-      try {
-        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+    // Get access to the camera
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
         video.srcObject = stream;
         video.play();
-        draw();
-      } catch (err) {
-        console.error("Error: " + err);
-      }
-    });
+      });
+    }
 
     function draw() {
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -40,20 +35,11 @@
       let maxRedX = 0;
       let maxRedY = 0;
 
-      const BLACK_THRESHOLD = 50;  // Adjust as needed
-      const WHITE_THRESHOLD = 200; // Adjust as needed
-
       for (let i = 0; i < length; i += 4) {
         const red = frame.data[i];
         const green = frame.data[i + 1];
         const blue = frame.data[i + 2];
         const alpha = frame.data[i + 3];
-
-        // Ignore black and white pixels
-        if ((red < BLACK_THRESHOLD && green < BLACK_THRESHOLD && blue < BLACK_THRESHOLD) ||
-            (red > WHITE_THRESHOLD && green > WHITE_THRESHOLD && blue > WHITE_THRESHOLD)) {
-          continue;
-        }
 
         // Check if this pixel is the reddest one found so far
         if (red > maxRed) {
@@ -76,6 +62,10 @@
       // Call the draw function again for the next frame
       requestAnimationFrame(draw);
     }
+
+    video.addEventListener('play', function() {
+      draw();
+    });
   </script>
 </body>
 </html>
