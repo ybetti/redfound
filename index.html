@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipbook Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            
+        }
+        #flipbook {
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 500px;
+            margin: auto;
+        }
+        .page {
+            width: 1200px; /* ページの幅 */
+            height: 1500px; /* ページの高さ */
+            background-color: white;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .page img {
+            max-width: 130%;
+            max-height: 130%;
+            transform: rotate(270deg); /* 画像を270度回転させる */
+        @media (max-width: 600px) {
+            #flipbook {
+                width: 100%;
+                height: auto;
+            }
+
+            .page {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="flipbook">
+        <!-- ページ画像をここに追加します -->
+        <div class="page"><img src="images/page_1.jpg" alt="Page 1"></div>
+        <div class="page"><img src="images/page_2.jpg" alt="Page 2"></div>
+        <div class="page"><img src="images/page_3.jpg" alt="Page 3"></div>
+        <div class="page"><img src="images/page_4.jpg" alt="Page 4"></div>
+        <div class="page"><img src="images/page_5.jpg" alt="Page 5"></div>
+        <div class="page"><img src="images/page_6.jpg" alt="Page 6"></div>
+        <div class="page"><img src="images/page_7.jpg" alt="Page 7"></div>
+        <div class="page"><img src="images/page_8.jpg" alt="Page 8"></div>
+        <div class="page"><img src="images/page_9.jpg" alt="Page 9"></div>
+        <div class="page"><img src="images/page_10.jpg" alt="Page 10"></div>
+        <div class="page"><img src="images/page_11.jpg" alt="Page 11"></div>
+        <div class="page"><img src="images/page_12.jpg" alt="Page 12"></div>
+        <div class="page"><img src="images/page_13.jpg" alt="Page 13"></div>
+        <div class="page"><img src="images/page_14.jpg" alt="Page 14"></div>
+        <div class="page"><img src="images/page_15.jpg" alt="Page 15"></div>
+        <div class="page"><img src="images/page_16.jpg" alt="Page 16"></div>
+        <div class="page"><img src="images/page_17.jpg" alt="Page 17"></div>
+        <div class="page"><img src="images/page_18.jpg" alt="Page 18"></div>
+        <div class="page"><img src="images/page_19.jpg" alt="Page 19"></div>
+        <div class="page"><img src="images/page_20.jpg" alt="Page 20"></div>
+        <div class="page"><img src="images/page_21.jpg" alt="Page 21"></div>
+        <div class="page"><img src="images/page_22.jpg" alt="Page 22"></div>
+        <div class="page"><img src="images/page_23.jpg" alt="Page 23"></div>
+        <div class="page"><img src="images/page_24.jpg" alt="Page 24"></div>
+        <div class="page"><img src="images/page_25.jpg" alt="Page 25"></div>
+        <div class="page"><img src="images/page_26.jpg" alt="Page 26"></div>
+        <div class="page"><img src="images/page_27.jpg" alt="Page 27"></div>
+        <div class="page"><img src="images/page_28.jpg" alt="Page 28"></div>
+        <div class="page"><img src="images/page_29.jpg" alt="Page 29"></div>
+        <div class="page"><img src="images/page_30.jpg" alt="Page 30"></div>
+        <div class="page"><img src="images/page_31.jpg" alt="Page 31"></div>
+        <div class="page"><img src="images/page_32.jpg" alt="Page 32"></div>
+        <div class="page"><img src="images/page_33.jpg" alt="Page 33"></div>
+        <div class="page"><img src="images/page_34.jpg" alt="Page 34"></div>
+        <div class="page"><img src="images/page_35.jpg" alt="Page 35"></div>
+        <div class="page"><img src="images/page_36.jpg" alt="Page 36"></div>
+        <div class="page"><img src="images/page_37.jpg" alt="Page 37"></div>
+        <div class="page"><img src="images/page_38.jpg" alt="Page 38"></div>
+        <div class="page"><img src="images/page_39.jpg" alt="Page 39"></div>
+        <div class="page"><img src="images/page_40.jpg" alt="Page 40"></div>
+        <div class="page"><img src="images/page_41.jpg" alt="Page 41"></div>
+        <div class="page"><img src="images/page_42.jpg" alt="Page 42"></div>
+        <div class="page"><img src="images/page_43.jpg" alt="Page 43"></div>
+        <div class="page"><img src="images/page_44.jpg" alt="Page 44"></div>
+        <div class="page"><img src="images/page_45.jpg" alt="Page 45"></div>
+        <div class="page"><img src="images/page_46.jpg" alt="Page 46"></div>
+        <div class="page"><img src="images/page_47.jpg" alt="Page 47"></div>
+        <div class="page"><img src="images/page_48.jpg" alt="Page 48"></div>
+        <div class="page"><img src="images/page_49.jpg" alt="Page 49"></div>
+        <div class="page"><img src="images/page_50.jpg" alt="Page 50"></div>
+        <div class="page"><img src="images/page_51.jpg" alt="Page 51"></div>
+        <div class="page"><img src="images/page_52.jpg" alt="Page 52"></div>
+        <div class="page"><img src="images/page_53.jpg" alt="Page 53"></div>
+        <div class="page"><img src="images/page_54.jpg" alt="Page 54"></div>
+        <div class="page"><img src="images/page_55.jpg" alt="Page 55"></div>
+        <div class="page"><img src="images/page_56.jpg" alt="Page 56"></div>
+        <div class="page"><img src="images/page_57.jpg" alt="Page 57"></div>
+        <div class="page"><img src="images/page_58.jpg" alt="Page 58"></div>
+        <div class="page"><img src="images/page_59.jpg" alt="Page 59"></div>
+        <div class="page"><img src="images/page_60.jpg" alt="Page 60"></div>
+        <div class="page"><img src="images/page_61.jpg" alt="Page 61"></div>
+        <div class="page"><img src="images/page_62.jpg" alt="Page 62"></div>
+        <div class="page"><img src="images/page_63.jpg" alt="Page 63"></div>
+        <div class="page"><img src="images/page_64.jpg" alt="Page 64"></div>
+        <div class="page"><img src="images/page_65.jpg" alt="Page 65"></div>
+        <div class="page"><img src="images/page_66.jpg" alt="Page 66"></div>
+        <div class="page"><img src="images/page_67.jpg" alt="Page 67"></div>
+        <div class="page"><img src="images/page_68.jpg" alt="Page 68"></div>
+        <div class="page"><img src="images/page_69.jpg" alt="Page 69"></div>
+        <!-- 必要に応じてページを追加 -->
+    </div>
+
+    <!-- ローカルのjQueryを読み込む -->
+    <script src="js/jquery.min.1.7.js"></script>
+    <!-- ローカルのTurn.jsを読み込む -->
+    <script src="js/turn.js"></script>
+    <script>
+        $(document).ready(function() {
+            var flipbook = $("#flipbook").turn({
+                width: $(window).width() * 0.8,
+                height: $(window).height() * 0.8,
+                autoCenter: true
+            });
+
+            $(window).resize(function() {
+                flipbook.turn('size', $(window).width() * 0.8, $(window).height() * 0.8);
+            });
+
+            if ('ontouchstart' in document.documentElement) {
+                $(document).on('touchstart', function(e) {
+                    var touch = e.originalEvent.touches[0];
+                });
+            }
+        });
+    </script>
+</body>
+</html>
