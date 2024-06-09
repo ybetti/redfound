@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Red Marker</title>
+  <title>Red Color Detection</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -56,11 +56,15 @@
         }
       }
 
+      // 赤色の強さでソートして上位5つのピクセルを選択
+      redPixels.sort((a, b) => b.red - a.red);
+      const topRedPixels = redPixels.slice(0, 5);
+
       // 以前のフレームのマーカーを消去
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // 複数の赤い領域にマーカーを描画
-      redPixels.forEach(pixel => {
+      // 上位5つの赤い領域にマーカーを描画
+      topRedPixels.forEach(pixel => {
         context.beginPath();
         context.arc(pixel.x, pixel.y, 10, 0, 2 * Math.PI, false);
         context.lineWidth = 5;
