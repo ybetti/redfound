@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Red</title>
+  <title>Red Marker</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -18,14 +18,14 @@
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
 
-    // 外カメラを使用するための制約を設定
+    // リアカメラを使用するための制約を設定
     const constraints = {
       video: {
         facingMode: { exact: "environment" } // "user" を "environment" に変更することでリアカメラを使用する
       }
     };
 
-    // ビデオを取得して表示
+    // ビデオストリームを取得して表示
     navigator.mediaDevices.getUserMedia(constraints)
       .then(function(stream) {
         video.srcObject = stream;
@@ -40,9 +40,7 @@
       const frame = context.getImageData(0, 0, canvas.width, canvas.height);
       const length = frame.data.length;
 
-      let maxRed = 0;
-      let maxRedX = 0;
-      let maxRedY = 0;
+      const redPixels = [];
 
       for (let i = 0; i < length; i += 4) {
         const red = frame.data[i];
@@ -50,34 +48,34 @@
         const blue = frame.data[i + 2];
         const alpha = frame.data[i + 3];
 
-        // 赤色の成分が他の色の成分よりも顕著に強い場合のみ対象とする
-        if (red > 100 && red > green * 1.5 && red > blue * 1.5 && red > maxRed) {
-          maxRed = red;
-          maxRedX = (i / 4) % canvas.width;
-          maxRedY = Math.floor((i / 4) / canvas.width);
+        // 赤色成分が他の色成分よりも顕著に強い場合のみ対象とする
+        if (red > 100 && red > green * 1.5 && red > blue * 1.5) {
+          const x = (i / 4) % canvas.width;
+          const y = Math.floor((i / 4) / canvas.width);
+          redPixels.push({ x, y, red });
         }
       }
 
-      // 前のフレームのマーカーを消去
+      // 以前のフレームのマーカーを消去
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // 最も赤色が濃い部分に丸のマーカーを描画
-      context.beginPath();
-      context.arc(maxRedX, maxRedY, 10, 0, 2 * Math.PI, false);
-      context.lineWidth = 3;
-      context.strokeStyle = 'yellow';
-      context.stroke();
+      // 複数の赤い領域にマーカーを描画
+      redPixels.forEach(pixel => {
+        context.beginPath();
+        context.arc(pixel.x, pixel.y, 10, 0, 2 * Math.PI, false);
+        context.lineWidth = 5;
+        context.strokeStyle = 'yellow';
+        context.stroke();
+      });
 
       // 次のフレームの描画をリクエスト
       requestAnimationFrame(draw);
     }
 
-    // ビデオが表示されると描画を始める
+    // ビデオが再生されると描画関数を呼び出す
     video.addEventListener('play', function() {
       draw();
     });
   </script>
-  
 </body>
-  
 </html>
