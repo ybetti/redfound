@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PThelper</title>
+  <title>PThelper2</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -65,7 +65,7 @@
       redPixels.forEach(pixel => {
         let canDrawMarker = true;
         markers.forEach(marker => {
-          if (calculateDistance(pixel, marker) < 20) { // 20ピクセル以内に他のマーカーがある場合、マーカーを描画しない
+          if (calculateDistance(pixel, marker) < 30) { // 30ピクセル以内に他のマーカーがある場合、マーカーを描画しない
             canDrawMarker = false;
           }
         });
