@@ -25,7 +25,7 @@
       }
     };
 
-    // ビデオスを取得して表示
+    // ビデオを取得して表示
     navigator.mediaDevices.getUserMedia(constraints)
       .then(function(stream) {
         video.srcObject = stream;
