@@ -53,7 +53,7 @@
         const alpha = frame.data[i + 3];
 
         // 赤色成分が他の色成分よりも顕著に強い場合のみ対象とする
-        if (red > 100 && red > green * 1.3 && red > blue * 1.3) {
+        if (red > 90 && red > green * 1.4 && red > blue * 1.4) {
           const x = (i / 4) % canvas.width;
           const y = Math.floor((i / 4) / canvas.width);
           redPixels.push({ x, y, red });
@@ -65,15 +65,15 @@
       redPixels.forEach(pixel => {
         let canDrawMarker = true;
         markers.forEach(marker => {
-          if (calculateDistance(pixel, marker) < 75) { // 35ピクセル以内に他のマーカーがある場合、マーカーを描画しない
+          if (calculateDistance(pixel, marker) < 70) { // 35ピクセル以内に他のマーカーがある場合、マーカーを描画しない
             canDrawMarker = false;
           }
         });
         if (canDrawMarker) {
           markers.push(pixel);
           context.beginPath();
-          context.arc(pixel.x, pixel.y, 13, 0, 2 * Math.PI, false);
-          context.lineWidth = 3;
+          context.arc(pixel.x, pixel.y, 12, 0, 2 * Math.PI, false);
+          context.lineWidth = 4;
           context.strokeStyle = 'lightgreen';
           context.stroke();
         }
