@@ -21,7 +21,7 @@
     // リアカメラを使用するための制約を設定
     const constraints = {
       video: {
-        facingMode: { exact: "environment" } // "user" を "environment" に変更することでリアカメラを使用する
+        facingMode: { exact: "environment" } // "user"（内カメ） を "environment" に変更することでリア（外）カメラを使用する
       }
     };
 
@@ -65,7 +65,7 @@
       redPixels.forEach(pixel => {
         let canDrawMarker = true;
         markers.forEach(marker => {
-          if (calculateDistance(pixel, marker) < 70) { // 35ピクセル以内に他のマーカーがある場合、マーカーを描画しない
+          if (calculateDistance(pixel, marker) < 70) { // 70ピクセル以内に他のマーカーがある場合、マーカーを描画しない
             canDrawMarker = false;
           }
         });
