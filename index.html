@@ -65,7 +65,7 @@
       redPixels.forEach(pixel => {
         let canDrawMarker = true;
         markers.forEach(marker => {
-          if (calculateDistance(pixel, marker) < 70) { // 70ピクセル以内に他のマーカーがある場合、マーカーを描画しない
+          if (calculateDistance(pixel, marker) < 40) { // 40ピクセル以内に他のマーカーがある場合、マーカーを描画しない
             canDrawMarker = false;
           }
         });
