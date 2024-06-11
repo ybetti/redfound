@@ -25,7 +25,7 @@
       }
     };
 
-    // ビデオストリームを取得して表示
+    // ビデオスを取得して表示
     navigator.mediaDevices.getUserMedia(constraints)
       .then(function(stream) {
         video.srcObject = stream;
@@ -52,7 +52,7 @@
         const blue = frame.data[i + 2];
         const alpha = frame.data[i + 3];
 
-        // 赤色成分が他の色成分よりも顕著に強い場合のみ対象とする
+        // 赤色成分が他の色成分よりも顕著な場合のみマーカーつける
         if (red > 90 && red > green * 1.4 && red > blue * 1.4) {
           const x = (i / 4) % canvas.width;
           const y = Math.floor((i / 4) / canvas.width);
@@ -83,7 +83,7 @@
       requestAnimationFrame(draw);
     }
 
-    // ビデオが再生されると描画関数を呼び出す
+    // ビデオが再生されたら描画関数を呼び出す
     video.addEventListener('play', function() {
       draw();
     });
