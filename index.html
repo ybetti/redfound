@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PThelper</title>
+  <title>PThelpernow</title>
   <style>
     #canvas {
       border: 1px solid black;
@@ -53,7 +53,7 @@
         const alpha = frame.data[i + 3];
 
         // 赤色成分が他の色成分よりも顕著な場合のみマーカーつける
-        if (red > 90 && red > green * 1.4 && red > blue * 1.4) {
+        if (red > 120 && red > green * 0.9 && red > blue * 0.9) {
           const x = (i / 4) % canvas.width;
           const y = Math.floor((i / 4) / canvas.width);
           redPixels.push({ x, y, red });
@@ -65,7 +65,7 @@
       redPixels.forEach(pixel => {
         let canDrawMarker = true;
         markers.forEach(marker => {
-          if (calculateDistance(pixel, marker) < 40) { // 40ピクセル以内に他のマーカーがある場合、マーカーを描画しない
+          if (calculateDistance(pixel, marker) < 25) { // 40ピクセル以内に他のマーカーがある場合、マーカーを描画しない
             canDrawMarker = false;
           }
         });
@@ -73,7 +73,7 @@
           markers.push(pixel);
           context.beginPath();
           context.arc(pixel.x, pixel.y, 8, 0, 2 * Math.PI, false);
-          context.lineWidth = 4;
+          context.lineWidth = 3;
           context.strokeStyle = 'lightgreen';
           context.stroke();
         }
