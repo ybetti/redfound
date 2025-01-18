@@ -53,7 +53,7 @@
         const alpha = frame.data[i + 3];
 
         // 赤色成分が他の色成分よりも顕著な場合のみマーカーつける
-        if (red > 120 && red > green * 0.9 && red > blue * 0.9) {
+        if (red > 100 && red > green * 1.5 && red > blue * 1.5 && green < 50 && blue < 50) {
           const x = (i / 4) % canvas.width;
           const y = Math.floor((i / 4) / canvas.width);
           redPixels.push({ x, y, red });
